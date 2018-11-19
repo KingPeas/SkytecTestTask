@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using KingDOM.SimpleFSM;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace KingDOM.Platformer2D
     {
         private DamageBehaviour damageBehaviour = null;
         private UnitData data = null;
+        SimpleMachine fsm;
 
         public UnitData Data
         {
@@ -35,7 +37,17 @@ namespace KingDOM.Platformer2D
             damageBehaviour = GetComponent<DamageBehaviour>();
         }
 
+        public virtual void Update()
+        {
+            fsm.Update();
+        }
+
         public void GetDamage(float power, DamageType kind = DamageType.Physics)
+        {
+
+        }
+
+        public virtual void InitFSM()
         {
 
         }
