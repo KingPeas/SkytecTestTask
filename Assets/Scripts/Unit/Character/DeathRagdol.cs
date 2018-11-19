@@ -27,8 +27,8 @@ namespace KingDOM.Platformer2D
                 go.AddComponent<Rigidbody2D>();
                 go.AddComponent<PolygonCollider2D>();
                 float timeLeft = Random.Range(minTime, maxTime);
-                Destroy(go, timeLeft);
                 go.transform.SetParent(transform.parent);
+                Destroy(go, timeLeft);
             }
 
         }
