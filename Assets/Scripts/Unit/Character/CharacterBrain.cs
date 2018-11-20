@@ -6,18 +6,14 @@ namespace KingDOM.Platformer2D
 {
     public class CharacterBrain : UnitBrain
     {
-
-
-        // Use this for initialization
-        void Start()
+        public override void InitFSM()
         {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            base.InitFSM();
+            fsm.AddStates(new[] { IDLE, MOVE, JUMP, ATTACK, SPECIAL_ATTACK });
+            fsm.In().To(IDLE);
+            //fsm
+            fsm.In(IDLE).Enter(() => SetState(BrainState.Idle));
+            fsm.Start();
         }
     }
 }

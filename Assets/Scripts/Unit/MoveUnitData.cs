@@ -7,7 +7,6 @@ namespace KingDOM.Platformer2D
     public class MoveUnitData : UnitData
     {
         public Rigidbody2D body = null;
-        public Transform Avatar = null;
         private bool isGrounded = false;
         private Vector2 moveDirection = Vector2.zero;
 
@@ -37,7 +36,7 @@ namespace KingDOM.Platformer2D
             }
         }
 
-        private void Awake()
+        protected override void Awake()
         {
             if (!body) body = GetComponent<Rigidbody2D>();
         }

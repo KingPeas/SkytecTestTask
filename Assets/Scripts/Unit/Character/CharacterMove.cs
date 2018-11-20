@@ -5,22 +5,11 @@ using UnityEngine;
 namespace KingDOM.Platformer2D
 {
 
-    public class CharacterMove : MonoBehaviour
+    public class CharacterMove : CharacterAction
     {
         public string AxisX = "Horizontal";
         public string AxisY = "Vertical";
         public float speed = 3f;
-        private CharacterData data = null;
-        // Use this for initialization
-        void Awake()
-        {
-            data = GetComponent<CharacterData>();
-            if (!data)
-            {
-                Debug.LogWarning("Нет данных по персонажу", this);
-                enabled = false;
-            }
-        }
 
         // Update is called once per frame
         void Update()
@@ -42,10 +31,7 @@ namespace KingDOM.Platformer2D
                         data.Avatar.localScale = scale;
                     }
                 }
-                if (data.body && data.IsGrounded) {
-                    dir.y = 0;
-                    data.body.MovePosition(data.body.position + dir * speed * Time.deltaTime);
-                }
+                transform.position = Vector3.MoveTowards(transform.position, transform.position + new Vector3(valX, 0, 0), speed * Time.deltaTime);
             }
             
         }

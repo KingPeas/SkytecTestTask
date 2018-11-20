@@ -7,9 +7,27 @@ namespace KingDOM.Platformer2D
 {
     public class UnitBrain : MonoBehaviour
     {
+        [AnimatorParameter]
+        public int AnimParameter = 0;
         private DamageBehaviour damageBehaviour = null;
         private UnitData data = null;
-        SimpleMachine fsm;
+        protected SimpleMachine fsm;
+
+        protected enum BrainState
+        {
+            Idle,
+            Move,
+            Jump,
+            Attack,
+            SpecialAttack
+        }
+
+        // состояния
+        protected const string IDLE = "idle";
+        protected const string MOVE = "move";
+        protected const string JUMP = "jump";
+        protected const string ATTACK = "attack";
+        protected const string SPECIAL_ATTACK = "spec_attack";
 
         public UnitData Data
         {
@@ -49,7 +67,11 @@ namespace KingDOM.Platformer2D
 
         public virtual void InitFSM()
         {
-
+            fsm = new SimpleMachine("CharacterBrain");
+        }
+         protected void SetState(BrainState state)
+        {
+            if (data.animator != null) data.animator.SetInteger(AnimParameter, (int)state);
         }
     }
 }
