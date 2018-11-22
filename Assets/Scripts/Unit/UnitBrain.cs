@@ -1,4 +1,5 @@
 ﻿using KingDOM.SimpleFSM;
+using KingDOM.SimpleFSM.Log;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,13 +8,15 @@ namespace KingDOM.Platformer2D
 {
     public class UnitBrain : MonoBehaviour
     {
-        [AnimatorParameter]
+        [AnimatorParameter(SourceName = "animator")]
         public int AnimParameter = 0;
         private DamageBehaviour damageBehaviour = null;
-        private UnitData data = null;
+        private MoveUnitData data = null;
         protected SimpleMachine fsm;
+        public Animator animator = null;
+        public bool UseLog = false;
 
-        protected enum BrainState
+        public enum BrainState
         {
             Idle,
             Move,
@@ -28,8 +31,9 @@ namespace KingDOM.Platformer2D
         protected const string JUMP = "jump";
         protected const string ATTACK = "attack";
         protected const string SPECIAL_ATTACK = "spec_attack";
+        protected const string DIE = "die";
 
-        public UnitData Data
+        public MoveUnitData Data
         {
             get
             {
@@ -44,7 +48,7 @@ namespace KingDOM.Platformer2D
 
         private void Awake()
         {
-            Data = GetComponent<UnitData>();
+            Data = GetComponent<MoveUnitData>();
             if (!Data)
             {
                 enabled = false;
@@ -53,6 +57,9 @@ namespace KingDOM.Platformer2D
             TakeDamage taken = GetComponent<TakeDamage>();
             if (taken) taken.Damage += GetDamage;
             damageBehaviour = GetComponent<DamageBehaviour>();
+            if (!animator && data.Avatar) animator = data.Avatar.GetComponent<Animator>();
+            InitFSM();
+            if (UseLog) LogUnity.Add(fsm);
         }
 
         public virtual void Update()
@@ -71,7 +78,7 @@ namespace KingDOM.Platformer2D
         }
          protected void SetState(BrainState state)
         {
-            if (data.animator != null) data.animator.SetInteger(AnimParameter, (int)state);
+            if (animator != null) animator.SetInteger(AnimParameter, (int)state);
         }
     }
 }

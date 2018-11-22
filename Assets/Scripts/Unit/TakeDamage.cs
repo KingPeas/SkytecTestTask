@@ -20,7 +20,7 @@ namespace KingDOM.Platformer2D
             {
                 UnitData data = GetComponent<UnitData>();
                 data.Energy -= power;
-                if (data.Energy <=0 ) Destroy(gameObject);
+                //if (data.Energy <=0 ) Destroy(gameObject);
             }
         }
     }

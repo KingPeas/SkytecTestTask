@@ -200,10 +200,14 @@ GameObject:
   - component: {fileID: 523431866}
   - component: {fileID: 523431865}
   - component: {fileID: 523431864}
+  - component: {fileID: 523431868}
   - component: {fileID: 523431863}
   - component: {fileID: 523431867}
   - component: {fileID: 523431862}
   - component: {fileID: 523431861}
+  - component: {fileID: 523431870}
+  - component: {fileID: 523431869}
+  - component: {fileID: 523431871}
   m_Layer: 11
   m_Name: Character
   m_TagString: Untagged
@@ -217,7 +221,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 523431860}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3bf682543b402a24eb7b1c78ee44fc6c, type: 3}
   m_Name: 
@@ -237,7 +241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AxisX: Horizontal
   AxisY: Vertical
-  speed: 6
+  speed: 4.5
 --- !u!114 &523431863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,8 +254,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Energy: 4
-  body: {fileID: 523431865}
   Avatar: {fileID: 1237207119}
+  IsDead: 0
+  body: {fileID: 523431865}
+  Attack: 0
+  CanAttack: 1
+  StateAttack: 3
   Score: 0
 --- !u!70 &523431864
 CapsuleCollider2D:
@@ -314,7 +322,62 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BtnJump: Jump
-  ForceJump: 15
+  ForceJump: 12
+--- !u!114 &523431868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 523431860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bde6bb4fd84bad4488c708cfd388a62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimParameter: 1649606143
+  animator: {fileID: 1237207120}
+  UseLog: 1
+  TimeRespawn: 1
+  TimeAttack: 0.5
+  TimeSpecialAttack: 0.5
+--- !u!114 &523431869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 523431860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78617588dd83b424e855886550a6e08d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AxisAttack: Fire2
+  State: 4
+--- !u!114 &523431870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 523431860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78617588dd83b424e855886550a6e08d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AxisAttack: Fire1
+  State: 3
+--- !u!114 &523431871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 523431860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e829496b027d3044daf3baa501419e16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listen: 255
 --- !u!1 &555470712 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100016, guid: 4bd025fbe3c94be43946d59e7ae40d3c,

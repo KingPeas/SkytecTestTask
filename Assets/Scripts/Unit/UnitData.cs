@@ -9,12 +9,8 @@ namespace KingDOM.Platformer2D
 
         public float Energy = 1f;
         public Transform Avatar = null;
-        public Animator animator = null;
+        public bool IsDead = false;
 
-        protected virtual void Awake()
-        {
-            if (!animator && Avatar) animator = Avatar.GetComponent<Animator>();
-        }
 
     }
 }
