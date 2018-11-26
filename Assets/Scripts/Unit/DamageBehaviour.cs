@@ -31,6 +31,7 @@ namespace KingDOM.Platformer2D
 
         public DamageType Exposed = (DamageType)int.MaxValue;
         public List<DamageModificator> modificators = null;
+        public float ScaleDamage = 1f;
 
         // Use this for initialization
         void Awake()
@@ -77,7 +78,7 @@ namespace KingDOM.Platformer2D
             {
                 damageValue += result.Value;
             }
-            return damageValue;
+            return KingUtil.Round(damageValue * ScaleDamage, 0.1f);
         }
 
         void CreateDefaultModicators()
