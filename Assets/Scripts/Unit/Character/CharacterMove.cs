@@ -9,7 +9,6 @@ namespace KingDOM.Platformer2D
     {
         public string AxisX = "Horizontal";
         public string AxisY = "Vertical";
-        public float speed = 3f;
 
         // Update is called once per frame
         void Update()
@@ -17,23 +16,15 @@ namespace KingDOM.Platformer2D
             float valX = Input.GetAxis(AxisX);
             float valY = Input.GetAxis(AxisY);
             Vector2 dir = new Vector2(valX, valY);
-            data.MoveDirection = dir;
+            data.move.moveDirection = dir;
 
             if (dir.sqrMagnitude > float.Epsilon)
             {
-                if (data.Avatar)
-                {
-                    if (Mathf.Abs(dir.x) > float.Epsilon)
-                    {
-                        int flip = dir.x < 0 ? -1 : 1;
-                        Vector3 scale = data.Avatar.localScale;
-                        scale.x = Mathf.Abs(scale.x) * Mathf.Sign(flip);
-                        data.Avatar.localScale = scale;
-                    }
-                }
-                transform.position = Vector3.MoveTowards(transform.position, transform.position + new Vector3(valX, 0, 0), speed * Time.deltaTime);
+                
+                transform.position = Vector3.MoveTowards(transform.position, transform.position + new Vector3(valX, 0, 0), data.move.speed * Time.deltaTime);
             }
-            
+
+            if (Mathf.Abs(valX) > 0.1) data.move.lookDirection = dir;
         }
     }
 

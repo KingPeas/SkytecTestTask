@@ -9,16 +9,15 @@ namespace KingDOM.Platformer2D
 
 
         public string BtnJump = "Jump";
-        public float ForceJump = 15;
         
 
         // Update is called once per frame
         void Update()
         {
             
-            if (data.IsGrounded && data.body && Input.GetButtonDown(BtnJump))
+            if (data.move.IsGrounded && data.avatar.body && Input.GetButtonDown(BtnJump))
             {
-                data.body.AddForce(Vector2.up * ForceJump, ForceMode2D.Impulse);
+                data.avatar.body.AddForce(Vector2.up * data.move.ForceJump, ForceMode2D.Impulse);
             }
         }
     }

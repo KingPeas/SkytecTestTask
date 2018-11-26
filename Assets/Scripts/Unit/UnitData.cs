@@ -8,8 +8,7 @@ namespace KingDOM.Platformer2D
     {
 
         public float Energy = 1f;
-        public Transform Avatar = null;
-        public bool IsDead = false;
+        public bool IsDestroyed = false;
 
 
     }

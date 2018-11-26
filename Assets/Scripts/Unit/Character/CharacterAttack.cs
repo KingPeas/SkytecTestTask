@@ -8,13 +8,16 @@ namespace KingDOM.Platformer2D
     {
         public string AxisAttack= "Fire1";
         public UnitBrain.BrainState State = UnitBrain.BrainState.Attack;
+        public int numWeapon = 0;
+
         // Update is called once per frame
-        void Update()
+        protected virtual void Update()
         {
-            if (data.CanAttack && Input.GetButtonDown(AxisAttack))
+            if (data.attack.CanAttack && Input.GetButtonDown(AxisAttack))
             {
-                data.Attack = true;
-                data.StateAttack = State;
+                data.attack.Active = true;
+                data.attack.StateAttack = State;
+                data.attack.numWeapon = numWeapon;
             }
 
         }

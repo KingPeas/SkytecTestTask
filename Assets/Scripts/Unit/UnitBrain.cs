@@ -8,12 +8,9 @@ namespace KingDOM.Platformer2D
 {
     public class UnitBrain : MonoBehaviour
     {
-        [AnimatorParameter(SourceName = "animator")]
-        public int AnimParameter = 0;
         private DamageBehaviour damageBehaviour = null;
         private MoveUnitData data = null;
         protected SimpleMachine fsm;
-        public Animator animator = null;
         public bool UseLog = false;
 
         public enum BrainState
@@ -28,9 +25,10 @@ namespace KingDOM.Platformer2D
         // состояния
         protected const string IDLE = "idle";
         protected const string MOVE = "move";
+        protected const string RUN = "run";
         protected const string JUMP = "jump";
         protected const string ATTACK = "attack";
-        protected const string SPECIAL_ATTACK = "spec_attack";
+        protected const string BLOCK = "block";
         protected const string DIE = "die";
 
         public MoveUnitData Data
@@ -57,7 +55,6 @@ namespace KingDOM.Platformer2D
             TakeDamage taken = GetComponent<TakeDamage>();
             if (taken) taken.Damage += GetDamage;
             damageBehaviour = GetComponent<DamageBehaviour>();
-            if (!animator && data.Avatar) animator = data.Avatar.GetComponent<Animator>();
             InitFSM();
             if (UseLog) LogUnity.Add(fsm);
         }
@@ -65,6 +62,7 @@ namespace KingDOM.Platformer2D
         public virtual void Update()
         {
             fsm.Update();
+            Render();
         }
 
         public void GetDamage(float power, DamageType kind = DamageType.Physics)
@@ -72,13 +70,33 @@ namespace KingDOM.Platformer2D
 
         }
 
+        public void Render()
+        {
+            if (data.avatar.render)
+            {
+                if (Mathf.Abs(data.move.moveDirection.x) > float.Epsilon)
+                {
+                    int flip = data.move.moveDirection.x < 0 ? -1 : 1;
+                    Vector3 scale = data.avatar.render.localScale;
+                    scale.x = Mathf.Abs(scale.x) * Mathf.Sign(flip);
+                    data.avatar.render.localScale = scale;
+                }
+            }
+        }
+
+        public void ActivateWepon(bool active)
+        {
+            GameObject go = data.GetWeapon();
+            if (go) go.SetActive(active);
+        }
+
         public virtual void InitFSM()
         {
-            fsm = new SimpleMachine("CharacterBrain");
+            fsm = new SimpleMachine("Brain");
         }
          protected void SetState(BrainState state)
         {
-            if (animator != null) animator.SetInteger(AnimParameter, (int)state);
+            if (data.avatar.animator != null) data.avatar.animator.SetInteger(data.avatar.AnimParameter, (int)state);
         }
     }
 }
