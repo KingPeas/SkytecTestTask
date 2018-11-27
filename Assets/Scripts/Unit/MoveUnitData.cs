@@ -16,15 +16,20 @@ namespace KingDOM.Platformer2D
             [AnimatorParameter(SourceName = "animator")]
             public int AnimParameter = 0;
             public float TimeRespawn = 1f;
+            public bool flip = false;            
         }
         [Serializable]
         public class Move
         {
             internal bool isGrounded = false;
+            internal bool underCover = false;
+            
             public float speed = 3f;
             public float ForceJump = 15;
             public Vector2 moveDirection = Vector2.zero;
             public Vector2 lookDirection = Vector2.zero;
+            public LayerMask maskGround = -1;
+            public Vector3 HeadPoint = Vector3.zero;
             public bool IsGrounded
             {
                 get
@@ -35,6 +40,19 @@ namespace KingDOM.Platformer2D
                 private set
                 {
                     isGrounded = value;
+                }
+            }
+
+            public bool UnderCover
+            {
+                get
+                {
+                    return underCover;
+                }
+
+                private set
+                {
+                    underCover = value;
                 }
             }
         }
@@ -63,8 +81,11 @@ namespace KingDOM.Platformer2D
         // Update is called once per frame
         void FixedUpdate()
         {
-            var contacts = Physics2D.OverlapCircleAll(transform.position, 0.2f);//, ~gameObject.layer);
-            move.isGrounded = contacts.Length > 1;
+            var contacts = Physics2D.OverlapCircleAll(transform.position, 0.2f, move.maskGround);
+            move.isGrounded = contacts.Length > 0;
+            contacts = Physics2D.OverlapCircleAll(transform.position + move.HeadPoint, 0.4f, move.maskGround);
+            move.underCover = contacts.Length > 0;
+
         }
 
         public GameObject GetWeapon()
@@ -80,6 +101,7 @@ namespace KingDOM.Platformer2D
             // Draw a yellow sphere at the transform's position
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, 0.2f);
+            Gizmos.DrawWireSphere(transform.position + move.HeadPoint, 0.4f);
         }
     }
 }

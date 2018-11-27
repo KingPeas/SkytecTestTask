@@ -11,10 +11,15 @@ namespace KingDOM.Platformer2D
         [Serializable]
         public class AI
         {
-            public float distanceDetectPlayer = 8;
-            public float distanceDetectHole = 1;
-            public float distanceDetectBullet = 3;
-            public float distanceDetectBlock = 2;
+            public CharacterData player = null;
+            public bool detectHole = false;
+            public bool detectBullet = false;
+            public bool detectAttackZone = false;
+            public bool detectBarrier = false;
+            public float TimeFollowing = 5f;
+            public float TimeBlock = 0.2f;
+            public float SpeedRun = 4f;
         }
+        public AI ai = new AI();
     }
 }

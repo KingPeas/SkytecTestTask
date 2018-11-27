@@ -39,7 +39,6 @@ namespace KingDOM.Platformer2D
             if (modificators == null) CreateDefaultModicators();
         }
 
-        // Update is called once per frame
         public float CalcDamage(float power, DamageType kind = DamageType.Physics)
         {
             DamageType exposedFilter = Exposed;

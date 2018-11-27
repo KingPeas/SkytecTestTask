@@ -15,11 +15,15 @@ namespace KingDOM.Platformer2D
 
         public enum BrainState
         {
-            Idle,
-            Move,
-            Jump,
-            Attack,
-            SpecialAttack
+            Idle = 0,
+            Move = 1,
+            Jump = 2,
+            Attack = 3,
+            SpecialAttack = 4,
+            Run = 5,
+            Block = 6,
+            Follow = 7,
+            Die = 8
         }
 
         // состояния
@@ -29,6 +33,7 @@ namespace KingDOM.Platformer2D
         protected const string JUMP = "jump";
         protected const string ATTACK = "attack";
         protected const string BLOCK = "block";
+        protected const string FOLLOW = "follow";
         protected const string DIE = "die";
 
         public MoveUnitData Data
@@ -56,7 +61,8 @@ namespace KingDOM.Platformer2D
             if (taken) taken.Damage += GetDamage;
             damageBehaviour = GetComponent<DamageBehaviour>();
             InitFSM();
-            if (UseLog) LogUnity.Add(fsm);
+            if (UseLog)
+                LogUnity.Add(fsm);
         }
 
         public virtual void Update()
@@ -67,7 +73,15 @@ namespace KingDOM.Platformer2D
 
         public void GetDamage(float power, DamageType kind = DamageType.Physics)
         {
-
+            if (damageBehaviour)
+            {
+                data.Energy -= damageBehaviour.CalcDamage(power, kind);
+            }
+            else
+            {
+                data.Energy -= power;
+            }
+            if (Data.Energy < 0) data.IsDestroyed = true;
         }
 
         public void Render()
@@ -76,9 +90,9 @@ namespace KingDOM.Platformer2D
             {
                 if (Mathf.Abs(data.move.moveDirection.x) > float.Epsilon)
                 {
-                    int flip = data.move.moveDirection.x < 0 ? -1 : 1;
+                    data.avatar.flip = data.move.moveDirection.x < 0 ;
                     Vector3 scale = data.avatar.render.localScale;
-                    scale.x = Mathf.Abs(scale.x) * Mathf.Sign(flip);
+                    scale.x = Mathf.Abs(scale.x) * (data.avatar.flip ? -1 : 1);
                     data.avatar.render.localScale = scale;
                 }
             }

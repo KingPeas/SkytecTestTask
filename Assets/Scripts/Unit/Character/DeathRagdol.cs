@@ -24,10 +24,10 @@ namespace KingDOM.Platformer2D
 
                     script.enabled = false;
                 }
-                go.AddComponent<Rigidbody2D>();
-                go.AddComponent<PolygonCollider2D>();
                 float timeLeft = Random.Range(minTime, maxTime);
                 go.transform.SetParent(transform.parent);
+                go.AddComponent<Rigidbody2D>();
+                go.AddComponent<PolygonCollider2D>();
                 Destroy(go, timeLeft);
             }
 
