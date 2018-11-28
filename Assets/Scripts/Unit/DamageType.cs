@@ -14,6 +14,7 @@ namespace KingDOM.Platformer2D
         Water,
         Electricity,
         Blood,
-        Necro
+        Necro,
+        Poison
     }
 }

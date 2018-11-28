@@ -11,6 +11,7 @@ namespace KingDOM.Platformer2D
         public event DamagedMethod SetDamage;
         public float DamagePower = 1f;
         public DamageType DamageMethod = DamageType.Physics;
+        public int NumModifier = -1;
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
