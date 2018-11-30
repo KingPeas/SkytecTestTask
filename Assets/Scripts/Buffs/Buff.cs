@@ -13,6 +13,7 @@ namespace KingDOM.Platformer2D
             {
                 Activate(data);
             }
+            Destroy(gameObject);
         }
 
         protected abstract void Activate(UnitData data);        
