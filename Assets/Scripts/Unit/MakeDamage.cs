@@ -10,6 +10,7 @@ namespace KingDOM.Platformer2D
 
         public event DamagedMethod SetDamage;
         public float DamagePower = 1f;
+        [BitMask]
         public DamageType DamageMethod = DamageType.Physics;
         public int NumModifier = -1;
 

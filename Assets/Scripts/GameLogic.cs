@@ -27,12 +27,12 @@ namespace KingDOM.Platformer2D
         // Update is called once per frame
         public void RegisterUnit(UnitData data)
         {
-            units.Add(data);
+            if (!units.Contains(data)) units.Add(data);
         }
 
         public void UnRegisterUnit(UnitData data)
         {
-            units.Remove(data);
+            if (units.Contains(data)) units.Remove(data);
         }
 
         public void ApplyModifiers(UnitData getter, UnitModifier modifier)
@@ -54,7 +54,7 @@ namespace KingDOM.Platformer2D
                 {
                     if (targetType.IsInstanceOfType(unit))
                     {
-                        var mod = Instantiate(modifier, transform);
+                        var mod = Instantiate(modifier, unit.transform);
                         mod.transform.localPosition = Vector3.zero;
                         mod.transform.localRotation = Quaternion.identity;
                     }

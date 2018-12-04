@@ -28,7 +28,7 @@ namespace KingDOM.Platformer2D
             /// </summary>
             Add  
         }
-
+        [BitMask]
         public DamageType Exposed = (DamageType)int.MaxValue;
         public List<DamageModificator> modificators = null;
         public float ScaleDamage = 1f;
@@ -36,7 +36,7 @@ namespace KingDOM.Platformer2D
         // Use this for initialization
         void Awake()
         {
-            if (modificators == null) CreateDefaultModicators();
+            if (modificators == null || modificators.Count <= 0) CreateDefaultModicators();
         }
 
         public float CalcDamage(float power, DamageType kind = DamageType.Physics)
@@ -55,6 +55,7 @@ namespace KingDOM.Platformer2D
             foreach (var modificator in modificators)
             {
                 if ((modificator.type & exposedFilter) == 0) continue;
+                if ((modificator.type & kind) == 0) continue;
                 switch (modificator.effect)
                 {
                     case DamageEffect.OnlyThis:

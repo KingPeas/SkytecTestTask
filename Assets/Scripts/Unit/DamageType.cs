@@ -8,13 +8,13 @@ namespace KingDOM.Platformer2D
     public enum DamageType
     {
 
-        Physics,
-        Fire,
-        Ice,
-        Water,
-        Electricity,
-        Blood,
-        Necro,
-        Poison
+        Physics = 1,
+        Fire = 2,
+        Ice = 4,
+        Water = 8,
+        Electricity=16,
+        Blood=32,
+        Necro = 64,
+        Poison = 128
     }
 }

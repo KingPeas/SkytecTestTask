@@ -12,7 +12,7 @@ namespace KingDOM.Platformer2D
         private Buff[] buffs = null;
         private static ResourceCollection instance = null;
 
-        public static ResourceCollection Instance { get { return Instance; } private set { Instance = value; } }
+        public static ResourceCollection Instance { get { return instance; } private set { instance = value; } }
 
         // Use this for initialization
         void Awake()
@@ -21,6 +21,7 @@ namespace KingDOM.Platformer2D
             {
                 Destroy(this);
             }
+            Instance = this;
         }
 
         public static UnitModifier GetModifier(int idx)

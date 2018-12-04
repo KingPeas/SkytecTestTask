@@ -76,6 +76,12 @@ namespace KingDOM.Platformer2D
         {
             if (!avatar.body) avatar.body = GetComponent<Rigidbody2D>();
             if (!avatar.animator && avatar.render) avatar.animator = avatar.render.GetComponent<Animator>();
+            if (GameLogic.Instance) GameLogic.Instance.RegisterUnit(this);
+        }
+
+        private void OnDisable()
+        {
+            if (GameLogic.Instance) GameLogic.Instance.UnRegisterUnit(this);
         }
 
         // Update is called once per frame

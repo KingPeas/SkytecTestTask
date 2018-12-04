@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4516026521840706}
   - component: {fileID: 61959802383479396}
   - component: {fileID: 114547017527531614}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: DetectorBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 4477237574861666}
   - component: {fileID: 58080279787039146}
   - component: {fileID: 114558323894614502}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: DetectorHole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 4592618350629706}
   - component: {fileID: 114152754464876050}
   - component: {fileID: 61230275677505168}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: DetectorBarrier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 4664766365768462}
   - component: {fileID: 114631983989852688}
   - component: {fileID: 61937014607815216}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: DetectorAttackZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 4657953590427810}
   - component: {fileID: 61977141787107210}
   - component: {fileID: 114304307325897182}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: DetectorPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -554,6 +554,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DamagePower: 1
   DamageMethod: 6
+  NumModifier: -1
 --- !u!114 &114547017527531614
 MonoBehaviour:
   m_ObjectHideFlags: 1
