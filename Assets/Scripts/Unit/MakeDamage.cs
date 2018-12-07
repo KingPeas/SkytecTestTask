@@ -13,6 +13,14 @@ namespace KingDOM.Platformer2D
         [BitMask]
         public DamageType DamageMethod = DamageType.Physics;
         public int NumModifier = -1;
+        public MoveUnitData source = null;
+        public bool OnlyForOne = true;
+
+        private void Start()
+        {
+            if (!source) source = GetComponentInParent<MoveUnitData>();
+        }
+
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -30,8 +38,25 @@ namespace KingDOM.Platformer2D
         {
             if (taken)
             {
-                taken.GetDamage(DamagePower, DamageMethod);
+                taken.GetDamage(DamagePower, DamageMethod, source);
                 if (SetDamage != null) SetDamage(DamagePower, DamageMethod);
+
+                if (!ResourceCollection.Instance) return;
+                UnitModifier modifier = ResourceCollection.GetModifier(NumModifier);
+                if (modifier == null) return;
+                UnitData data = taken.GetComponentInParent<UnitData>();
+                if (data == null) return;
+                if (OnlyForOne)
+                {
+                    var mod = Instantiate(modifier, data.transform);
+                    mod.transform.localPosition = Vector3.zero;
+                    mod.transform.localRotation = Quaternion.identity;
+                    mod.source = source;
+                }
+                else
+                {
+                    if (GameLogic.Instance) GameLogic.Instance.ApplyModifiers(source, modifier);
+                }
             }
         }
     }

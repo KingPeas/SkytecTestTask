@@ -19,6 +19,7 @@ namespace KingDOM.Platformer2D
                 var mod = Instantiate(modifier, data.transform);
                 mod.transform.localPosition = Vector3.zero;
                 mod.transform.localRotation = Quaternion.identity;
+                mod.source = data as MoveUnitData;
             }
             else
             {

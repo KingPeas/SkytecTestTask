@@ -89,6 +89,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DamagePower: 3
   DamageMethod: 0
+  NumModifier: 2
+  source: {fileID: 0}
+  OnlyForOne: 1
 --- !u!212 &212880708414002854
 SpriteRenderer:
   m_ObjectHideFlags: 1

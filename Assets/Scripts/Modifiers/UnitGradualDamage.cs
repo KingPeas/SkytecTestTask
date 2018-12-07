@@ -24,7 +24,7 @@ namespace KingDOM.Platformer2D
 
         private void RepeatDamage()
         {
-            taker.GetDamage(Power, Kind);
+            taker.GetDamage(Power, Kind, source);
         }
     }
 }

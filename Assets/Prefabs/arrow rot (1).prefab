@@ -137,6 +137,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DamagePower: 0.5
   DamageMethod: 1
+  NumModifier: 3
+  source: {fileID: 0}
+  OnlyForOne: 1
 --- !u!114 &114686198075165448
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -150,6 +153,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DamagePower: 2
   DamageMethod: 0
+  NumModifier: -1
+  source: {fileID: 0}
+  OnlyForOne: 1
 --- !u!212 &212665604758232630
 SpriteRenderer:
   m_ObjectHideFlags: 1

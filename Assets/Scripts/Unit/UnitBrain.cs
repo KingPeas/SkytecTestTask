@@ -1,4 +1,5 @@
-﻿using KingDOM.SimpleFSM;
+﻿using KingDOM.Event;
+using KingDOM.SimpleFSM;
 using KingDOM.SimpleFSM.Log;
 using System.Collections;
 using System.Collections.Generic;
@@ -71,7 +72,7 @@ namespace KingDOM.Platformer2D
             Render();
         }
 
-        public void GetDamage(float power, DamageType kind = DamageType.Physics)
+        public void GetDamage(float power, DamageType kind = DamageType.Physics, MoveUnitData source = null)
         {
             if (damageBehaviour)
             {
@@ -81,7 +82,11 @@ namespace KingDOM.Platformer2D
             {
                 data.Energy -= power;
             }
-            if (Data.Energy < 0) data.IsDestroyed = true;
+            if (Data.Energy <= 0)
+            {
+                data.IsDestroyed = true;
+                Sender.SendEvent(EventName.DESTROYER, this, ParmName.TARGET, data, ParmName.SOURCE, source);
+            }
         }
 
         public void Render()

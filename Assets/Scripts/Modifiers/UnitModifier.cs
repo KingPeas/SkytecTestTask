@@ -8,6 +8,7 @@ namespace KingDOM.Platformer2D
 
         public float TimeEffect = 5f;
         protected UnitData data = null;
+        internal MoveUnitData source = null;
 
         private void OnEnable()
         {
